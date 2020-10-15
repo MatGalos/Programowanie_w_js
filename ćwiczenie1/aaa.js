@@ -8,7 +8,7 @@ for(let idx=0;idx<gallery.length;idx++){
     img.addEventListener('click',showLightbox);
     img.setAttribute('id','b'+idx);
 }
-
+//aktywacja  lightboxa
 function showLightbox(ev){
     currentImg=ev.target;
     const lightbox=document.querySelector('.lightbox');
@@ -20,12 +20,13 @@ function showLightbox(ev){
 
 
 }
+//ukrywanie lightboxa
 function hideLightbox(){
     const lightbox=document.querySelector('.lightbox');
     lightbox.classList.remove('visible');
     lightbox.removeAttribute('onclick','hideLightbox');
 }
-
+//zmiana obrazka
 function changeLightbox(change){
     let calcNewImg=change;
     if(calcNewImg>gallery.length-1){
@@ -43,12 +44,11 @@ function changeLightbox(change){
     img.setAttribute('onclick','hideLightbox()');
     lightbox.classList.add('visible');
 }
-
+//przypisanie nowego numeru
 function leftright(number){
-    let g=showId()+number;
     changeLightbox(showId()+number);
 }
-
+//przekazanie id obrazka
 function showId(){
     let Id;
     for(let a=0;a<gallery.length;a++){
@@ -60,5 +60,3 @@ function showId(){
     }
     return Id;
 }
-
-// można zrobić dzięki przypisanemu id
