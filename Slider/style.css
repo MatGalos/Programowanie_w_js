@@ -1,5 +1,22 @@
 body{
-    background: yellow;
+    background: #000000;
+}
+
+.gallery{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 8%;
+}
+.gallery img{
+    width: max-content;
+    height: max-content;
+    padding: 10px;
+}
+
+.gallery img:hover{
+    width: 440px;
+    height: 640px;
 }
 
 .lightbox{
@@ -18,23 +35,72 @@ body{
 }
 
 .arrow_prev{
-    position: fixed;
-    z-index: 101;
-    width: 50px;
-    height: 50px;
-    background-color: white;
-    cursor: pointer;
-    left:0;
+    display:inline-block!important;
+    position:relative;
+    width:104px;
+    height:104px;
+    border-radius:100%;
+    background:rgba(0,0,0,0);
+    box-sizing:content-box;
 }
-.arrow_next{
-    position: fixed;
-    z-index: 101;
-    width: 50px;
-    height: 50px;
-    background-color: white;
-    cursor: pointer;
+
+.arrow_prev::before{
+    position:absolute;
+    content:'';
+    margin:auto;
+    width:calc(104px/3.5);
+    height:calc(104px/3.5);
+    background:rgba(0,0,0,0);
+    border:calc(104px/8) solid #2e2d2d;
+    border-right:none;
+    border-top:none;
+    top:0;
+    bottom:0;
+    left:calc(104px/8);
     right:0;
+    transform:rotate(45deg);
+    box-sizing:content-box;
 }
+
+.arrow_prev:hover::before{
+    border:calc(104px/6) solid #666666;
+    border-right:none;
+    border-top:none;
+}
+
+.arrow_next{
+    display:inline-block!important;
+    position:relative;
+    width:104px;
+    height:104px;
+    border-radius:100%;
+    background:rgba(0,0,0,0);
+    box-sizing:content-box
+}
+
+.arrow_next:before{
+    position:absolute;
+    content:'';
+    margin:auto;
+    width:calc(104px/3.5);
+    height:calc(104px/3.5);
+    background:rgba(0,0,0,0);
+    border:calc(104px/8) solid #2e2d2d;
+    border-right:none;
+    border-top:none;
+    top:0;
+    bottom:0;
+    left:0;
+    right:calc(104px/8);
+    transform:rotate(-135deg);
+    box-sizing:content-box;
+}
+.arrow_next:hover::before{
+    border:calc(104px/6) solid #666666;
+    border-right:none;
+    border-top:none;
+}
+
 
 .visible{
     transform: scale(1);
