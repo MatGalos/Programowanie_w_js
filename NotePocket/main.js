@@ -1,5 +1,5 @@
 
-const lsNotesKey = 'notes';
+/*const lsNotesKey = 'notes';
 // 1. how to store & save notes in local storage
 const notes = [];
 // json
@@ -60,4 +60,7 @@ function onNewNote() {
 const title = document.querySelector('#noteTitle').value;
 const content = document.querySelector('#noteContent').value;
 console.log(title, content);
-}
+}*/
+const notesObj = new Notes();
+
+document.querySelector('#addNewNote').addEventListener('click', onNewNote);
