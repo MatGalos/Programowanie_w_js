@@ -1,0 +1,16 @@
+.hole{
+    display: block;
+    width:100px;
+    height:100px;
+    background-color: black;
+    border-radius:50% ;
+    margin:10px;
+}
+
+.ball{
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-color: grey;
+    border-radius:50% ;
+}
