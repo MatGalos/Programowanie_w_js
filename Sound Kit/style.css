@@ -1,0 +1,19 @@
+.keycaps{
+    width: 130px;
+    height: 130px;
+    margin: 2px;
+    background: rgb(0,212,255);
+    background: radial-gradient(circle, rgba(0,212,255,1) 0%, rgb(19, 137, 247) 100%);
+    display: inline-block;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    font-size: 16px;
+    font-family: 'Goldman', cursive;
+    text-align: center;
+}
+.playing{
+    transform: scale(1.05);
+    background: rgb(255,255,255);
+background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgb(43, 42, 42) 100%);
+    display: inline-block;
+}
