@@ -1,19 +1,68 @@
+body{
+    margin: 00;
+background-color: cornflowerblue;
+}
+
+.main{
+    margin: auto;
+    background-color: #0e0d0d;
+    position: relative;
+    width: 80%;
+    height:840px;
+}
+
+.content{
+    position: absolute;
+    transform: translate(2.5%,4.5%);
+    margin: 0;
+    width: 95%;
+    height: 90%;
+    font-family: 'Goldman', cursive;
+    background-color: rgb(66, 66, 66);
+    display: grid;
+    grid-template-columns:  auto auto auto auto auto auto auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto;
+}
+
 .keycaps{
     width: 130px;
-    height: 130px;
-    margin: 2px;
-    background: rgb(0,212,255);
-    background: radial-gradient(circle, rgba(0,212,255,1) 0%, rgb(19, 137, 247) 100%);
-    display: inline-block;
+    height: 125px;
     transition-duration: 200ms;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
     font-size: 16px;
-    font-family: 'Goldman', cursive;
+    background-color:rgb(66, 66, 66);
     text-align: center;
 }
+
+.title{
+    background-color: #0e0d0d;
+    grid-column-start: 4;
+    grid-column-end:9 ;
+}
+
+.drum{
+    background: rgb(0,212,255);
+    background: radial-gradient(circle, rgba(0,212,255,1) 0%, rgb(19, 137, 247) 100%);
+}
+
+.bass{
+    background: rgb(1, 255, 1);
+    background: radial-gradient(circle, rgb(0, 255, 42) 0%, rgb(16, 136, 0) 100%);
+}
+
+.piano{
+    background: rgb(252, 0, 0);
+    background: radial-gradient(circle, rgb(252, 62, 62) 0%, rgb(107, 2, 2) 100%);
+}
+
+.guitar{
+    background: rgb(214, 252, 0);
+    background: radial-gradient(circle, rgb(252, 249, 62) 0%, rgb(157, 168, 0) 100%);
+}
+
 .playing{
     transform: scale(1.05);
     background: rgb(255,255,255);
-background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgb(43, 42, 42) 100%);
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgb(43, 42, 42) 100%);
     display: inline-block;
 }
