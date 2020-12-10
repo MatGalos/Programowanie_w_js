@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Programowanie_w_js",
+		"cSpell.words": [
+			"Nazwisko",
+			"Pracownik"
+		]
+	}
+}
