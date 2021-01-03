@@ -1,27 +1,29 @@
-class NotesUI {
-    constructor(containerSelector = 'section') {
-        this.notesContainer = document.querySelector(containerSelector);
+import Note from './note.js';
+export default class NotesUI {
+    constructor(containerSelector = 'notesContainer',newNote='noteCreate') {
+        this.notesContainer = document.getElementById(containerSelector);
+        this.newNoteCreate=document.getElementById(newNote);
     }
-    addNote(note) {
-        const htmlNote = this.createNote(note);
-        const container = this.getNotesContainer();
-        container.appendChild(htmlNote);
+    createNote(){
+        const title=document.getElementById('noteTitle');
+        const content=document.getElementById('noteContent');
+        const note= new Note(title.value, content.value);
+        title.value = '';
+        content.value= '';
+        return note;
     }
-    createNote(note) {
-        const htmlNote = document.createElement('div');
-        htmlNote.classList.add('note');
-        // do all the things with notehtml object - create title, content ...
-        return htmlNote;
+    removeNote(eventNoteId,notes) {
+        const noteIndex = this.getNoteIndex(eventNoteId,notes);
+        notes.splice(noteIndex,1);
     }
-    removeNote(id) {
-        const note = this.getNote(id);
-        const container = this.getNotesContainer();
-        container.removeChild(note);
+    onPinnedClick(isPinned,noteId,notes){
+        notes[this.getNoteIndex(noteId,notes)].pinned = !isPinned;
     }
-    getNote(id) {
-        return document.querySelector('#' + id);
+    getNoteIndex(noteId,notes){
+        return notes.findIndex(note=>note.id==noteId);
     }
-    getNotesContainer() {
-        return this.notesContainer;
+
+    changeColor(noteColor,noteId,notes){
+        notes[this.getNoteIndex(noteId,notes)].color = noteColor;
     }
 }

@@ -1,4 +1,4 @@
-class Db {
+export default class Db {
     constructor() {
         this.lsNotesKey = 'notes';
     }
@@ -8,5 +8,11 @@ class Db {
     getNotes() {
         // check if localStorage has item this.lsNotesKey
         return JSON.parse(localStorage.getItem(this.lsNotesKey));
+    }
+    checkForNullResponse(){
+        if(localStorage.getItem(this.lsNotesKey) === null)
+            return false;
+        else
+            return true;
     }
 }
