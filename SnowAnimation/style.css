@@ -1,30 +1,8 @@
 body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
     background-color: rgb(8, 8, 87);
-}
-
-.container{
-    height: 60rem;
-    overflow: hidden;
-}
-
-.snowflake{
-    display: inline-block;
-    color: white;
-    font-size: 10rem;
-    padding: 1rem;
-    animation: fall 10s linear forwards infinite;
-    transform: translateY(-20rem);
-}
-
-.snowflake::before{
-    content:"*" ;
-}
-
-@keyframes fall{
-    from{
-        transform: translateY(-20rem);
-    }
-    to{
-        transform: translateY(100rem);
-    }
+    background-attachment: fixed;
 }
