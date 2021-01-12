@@ -1,0 +1,88 @@
+body{
+    background-color: blanchedalmond;
+}
+
+#addCity{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    background-color: rgba(255, 204, 204, 0.479);
+    font-size: 30px;
+}
+
+#cityName{
+    height: 30px;
+    width: 250px;
+    margin: 5px;
+}
+
+#addCity input{
+    margin: 10px;
+}
+
+button{
+    background-color:  rgba(247, 160, 160, 0.479);
+    border-radius: 5px;
+    border:none;
+    margin: 5px;
+    font-size: 20px;
+}
+
+button:hover{
+    background-color:  rgba(255, 110, 110, 0.479);
+}
+
+#cityInfo{
+    padding: 20px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.citySection{
+    border:solid 3px ;
+    min-width: 300px;
+    min-height: 250px;
+    display: inline-block;
+    margin: 30px;
+    background-color: rgba(255, 204, 204, 0.479);
+}
+
+.citySection:hover{
+    background-color: rgba(247, 181, 181, 0.479);
+}
+
+
+#cityInfo section ul{
+    list-style-type: none;
+    margin-right: 15px;
+}
+
+#cityInfo section ul li{
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.cityHeader{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bolder;
+    justify-content: center;
+}
+
+.cityHeader img{
+    height: 200px;
+}
+
+.outdatedInfo{
+    filter:grayscale(90%);
+}
+
+.removeButton{
+    text-align: center;
+    margin-left:18px;
+}
