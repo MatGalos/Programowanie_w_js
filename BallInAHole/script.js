@@ -65,7 +65,7 @@ function moveBall(){
     if(holes.length==0){
         end(true);
     }
-    else if(ball.x>windowWidth+200 || ball.x<0-200 || ball.y>windowHeight+200||ball.y<0-200) end(false);
+    else if(ball.x>windowWidth+200 || ball.x<0-200 || ball.y>windowHeight+200||ball.y<0-200) end(false,points);
     let vertical=(position.beta-position.initialBeta)/30;
     let horizontal=(position.alpha-position.initialBeta)/30;
     ball.x+=horizontal*ball.speedX;
@@ -101,6 +101,7 @@ function collisions(holesArray){
                 holes=newArray;
                 console.log(points);
                 points++;
+                updatePointCounter(points);
             }
             else if(index==holesArray.length-2){
                 if(Math.abs(ball.x-hole.x)<=hole.radius&& Math.abs(ball.y-hole.y)<=hole.radius){
@@ -110,6 +111,11 @@ function collisions(holesArray){
         }
         index++;
     }
+}
+
+function updatePointCounter(points){
+    let punkty=document.querySelector('#points');
+    punkty.textContent=points;
 }
 
 function getPosition(ev){
