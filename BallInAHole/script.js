@@ -3,11 +3,12 @@ let windowHeight=window.innerHeight;
 let windowWidth=window.innerWidth;
 let bestTime;
 appInit();
-alert('Najlepszy czas: '+bestTime+
+alert('Celem gry jest wpadnięcie do 99 dziur. Najlepszy czas: '+bestTime+
 ' Naciśnij ok aby uruchomić gre');
-let holeAmmount=Math.floor(Math.random()*20)+5;
+let holeAmmount=99;
 let context=canvas.getContext('2d');
 let startTime=Date.now();
+let points=0;
 let ball= {
     x:windowWidth/2,
     y:windowHeight/2,
@@ -65,8 +66,8 @@ function moveBall(){
         end(true);
     }
     else if(ball.x>windowWidth+200 || ball.x<0-200 || ball.y>windowHeight+200||ball.y<0-200) end(false);
-    let vertical=(position.beta-position.initialBeta)/35;
-    let horizontal=(position.alpha-position.initialBeta)/35;
+    let vertical=(position.beta-position.initialBeta)/30;
+    let horizontal=(position.alpha-position.initialBeta)/30;
     ball.x+=horizontal*ball.speedX;
     ball.y+=vertical*ball.speedY;
     context.clearRect(0,0,windowWidth,windowHeight);
@@ -84,7 +85,8 @@ function drawHoles(context,holes){
             context.beginPath()
             context.arc(hole.x,hole.y,hole.radius,0,Math.PI*2);
             if(index==holes.length-1) context.fillStyle='blue';
-            else context.fillStyle='red';
+            else if (index==holes.length-2) context.fillStyle='red';
+            else context.fillStyle='rgba(255, 255, 255, 0.5)';
             context.fill();
             index++;
         }
@@ -97,10 +99,12 @@ function collisions(holesArray){
             if(index==holesArray.length-1){
                 let newArray=holes.filter(i =>i!==hole);
                 holes=newArray;
+                console.log(points);
+                points++;
             }
-            else{
+            else if(index==holesArray.length-2){
                 if(Math.abs(ball.x-hole.x)<=hole.radius&& Math.abs(ball.y-hole.y)<=hole.radius){
-                    end(false);
+                    end(false,points);
                 }
             }
         }
@@ -122,7 +126,8 @@ function calculateSpeed(){
 function appInit(){
     resizeCanvas();
     if(localStorage.getItem('bestTime')){
-        bestTime=localStorage.getItem('bestTime');
+        let temp=localStorage.getItem('bestTime');
+        bestTime=`${Math.floor(temp/60)}:${(temp%60).toFixed(0)}`;
     }
     else bestTime='00:00';
 }
@@ -136,21 +141,21 @@ let interval=setInterval(()=>{
     moveBall();
 },1000/60)
 
-function end(isWon){
+function end(isWon,points){
     clearInterval(interval);
     window.removeEventListener('deviceorientation',getPosition);
     if(isWon==true){
         let stopTime=Date.now();
         let playtime=(stopTime-startTime)/1000;
-        let output=`${Math.floor(playtime/60)}:${(playtime%60).toFixed(1)}`;
+        let output=`${Math.floor(playtime/60)}:${(playtime%60).toFixed(0)}`;
         if(playtime<bestTime||bestTime=='00:00'){
             localStorage.setItem('bestTime',playtime);
         }
-        alert(output+". Naciśnij ok aby zacząć nową grę");
+        alert('Wpadłeś do wszystkich 99 dziur, gratulacje! zajeło ci to '+output+" minut. Naciśnij ok aby zacząć nową grę");
         location.reload();
     }
     else{
-        alert('koniec gry. Naciśnij ok aby rozpocząć ponownie.');
+        alert('koniec gry. Uzyskałeś '+points+' punktów. Naciśnij ok aby rozpocząć ponownie.');
         location.reload();
     }
 }
