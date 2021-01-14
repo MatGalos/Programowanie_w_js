@@ -60,6 +60,24 @@ background-color: cornflowerblue;
     background: radial-gradient(circle, rgb(252, 249, 62) 0%, rgb(157, 168, 0) 100%);
 }
 
+#light{
+    margin: auto;
+    height: 20px;
+    width: 80px;
+}
+
+.inactive{
+    background-color: black;
+}
+
+.rec{
+    background: red;
+}
+
+.play{
+    background: green;
+}
+
 .playing{
     transform: scale(1.05);
     background: rgb(255,255,255);
