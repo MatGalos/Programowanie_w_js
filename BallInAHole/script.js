@@ -5,7 +5,7 @@ let bestTime;
 appInit();
 alert('Celem gry jest wpadnięcie do 99 dziur. Najlepszy czas: '+bestTime+
 ' Naciśnij ok aby uruchomić gre');
-let holeAmmount=99;
+let holeAmmount=5;
 let context=canvas.getContext('2d');
 let startTime=Date.now();
 let points=0;
@@ -154,7 +154,7 @@ function end(isWon,points){
         let stopTime=Date.now();
         let playtime=(stopTime-startTime)/1000;
         let output=`${Math.floor(playtime/60)}:${(playtime%60).toFixed(0)}`;
-        if(playtime<bestTime||bestTime=='00:00'){
+        if(playtime<localStorage.getItem('bestTime')||bestTime=='00:00'){
             localStorage.setItem('bestTime',playtime);
         }
         alert('Wpadłeś do wszystkich 99 dziur, gratulacje! zajeło ci to '+output+" minut. Naciśnij ok aby zacząć nową grę");
