@@ -5,7 +5,7 @@ let bestTime;
 appInit();
 alert('Celem gry jest wpadnięcie do 99 dziur. Najlepszy czas: '+bestTime+
 ' Naciśnij ok aby uruchomić gre');
-let holeAmmount=5;
+let holeAmmount=99;
 let context=canvas.getContext('2d');
 let startTime=Date.now();
 let points=0;
