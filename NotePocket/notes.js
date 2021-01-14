@@ -1,21 +1,23 @@
 import Db from './db.js';
 import NotesUI from './notes-ui.js';
-export default class Notes {
-    constructor() {
+export default class Notes{
+    constructor(){
         this.notes = [];
         this.db = new Db();
-        this.notesUI = new NotesUI();
+        this.ui = new NotesUI();
     }
 
-    addNote() {
-        const note=this.notesUI.createNote()
+    addNote(){
+        const note = this.ui.createNewNote();
         this.notes.push(note);
         this.synchronizeLs();
     }
+
     synchronizeLs(){
         this.db.saveNotes(this.notes);
         this.renderNotes();
     }
+
     removeCurrentNotesFromHtml(){
         const notesContainer = document.getElementById('notesContainer');
         const childs = Array.from(notesContainer.childNodes);
@@ -23,6 +25,7 @@ export default class Notes {
             notesContainer.removeChild(child);
         }
     }
+
     renderNotes(){
         this.notes = [];
         if(this.db.checkForNullResponse()){
@@ -32,6 +35,7 @@ export default class Notes {
             this.addNotesToHtml();
         }
     }
+
     sortNotes(){
         const earlierDate = (a,b) =>{
             if(a.date === b.date)
@@ -52,42 +56,35 @@ export default class Notes {
         this.notes.sort(earlierDate);
         this.notes.sort(pinnedFirst);
     }
+
     addNotesToHtml(){
         for(const note of this.notes){
             this.createHtmlNote(note);
         }
     }
+
     createHtmlNote(note){
         const notesContainer = document.getElementById('notesContainer');
         const isPinned = note.pinned?'pinned':'unpinned';
-
         const htmlNote = document.createElement('section');
         htmlNote.id= note.id;
         htmlNote.classList.add('note', note.color, isPinned);
-
         const htmltitle = document.createElement('h1');
         htmltitle.innerHTML = note.title;
-
         const htmlContent = document.createElement('p');
         htmlContent.innerHTML = note.content;
-
         const htmlTime = document.createElement('time');
         const datex = new Date(note.date); 
-
         htmlTime.innerHTML = 'Created '+ datex.toLocaleString();
-        
         const htmlColorChange = this.createPalette(note.color,note.id);
         htmlColorChange.classList.add('paletteHolder');
-        
         const pinnedArea = this.createPinnedCheck(note.pinned,note.id);
-
         const htmlButton = document.createElement('button');
         htmlButton.innerHTML = 'Remove';
         htmlButton.addEventListener('click',()=> {
-            this.notesUi.removeNote(note.id, this.notes);
+            this.ui.removeNoteBtnClick(note.id, this.notes);
             this.synchronizeLs();
         });
-
         htmlNote.appendChild(htmltitle);
         htmlNote.appendChild(htmlContent);
         htmlNote.appendChild(htmlTime);
@@ -95,42 +92,22 @@ export default class Notes {
         htmlNote.appendChild(pinnedArea);
         htmlNote.appendChild(htmlButton);
         console.log('adding to html:',htmlNote);
-
         notesContainer.appendChild(htmlNote);
     }
+
     createPalette(noteColor,noteId){
-        const olive = document.createElement('div');
-        const lavend = document.createElement('div');
         const blue = document.createElement('div');
-        const lightblue = document.createElement('div');
-        const sand = document.createElement('div');
+        const green=document.createElement('div');
         const red = document.createElement('div');
         const violet = document.createElement('div');
-        const def = document.createElement('div');
-        olive.classList.add('olive','palette');
-        lavend.classList.add('lavend', 'palette');
         blue.classList.add('blue', 'palette');
-        lightblue.classList.add('lightblue', 'palette');
-        sand.classList.add('sand', 'palette');
         red.classList.add('red', 'palette');
         violet.classList.add('violet', 'palette');
-        def.classList.add('default', 'palette');
+        green.classList.add('green', 'palette');
         
         switch(noteColor){
-        case 'olive':
-            olive.classList.add('chosenColor');
-            break;
-        case 'lavend':
-            lavend.classList.add('chosenColor');
-            break;
         case 'blue':
             blue.classList.add('chosenColor');
-            break;
-        case 'lightblue':
-            lightblue.classList.add('chosenColor');
-            break;
-        case 'sand':
-            sand.classList.add('chosenColor');
             break;
         case 'red':
             red.classList.add('chosenColor');
@@ -138,13 +115,13 @@ export default class Notes {
         case 'violet':
             violet.classList.add('chosenColor');
             break;
-        case 'default':
-            def.classList.add('chosenColor');
+        case 'green':
+            green.classList.add('chosenColor');
             break;
         }
         const colors = [];
         const palette = document.createElement('div');
-        colors.push(olive,lavend,blue,lightblue,sand,red,violet,def);
+        colors.push(blue,red,violet,green);
         for(const col of colors){
             palette.appendChild(col);
             col.addEventListener('click',()=>{
@@ -154,25 +131,19 @@ export default class Notes {
         }
         return palette;
     }
+    
     createPinnedCheck(isPinned,noteId){
         const pinnedAreaDiv = document.createElement('div');
         pinnedAreaDiv.classList.add('pinnedArea');
-
         const pinnedInput = document.createElement('input');
         pinnedInput.setAttribute('type','checkbox');
-
         pinnedAreaDiv.appendChild(pinnedInput);
-        console.log(pinnedInput);
-        console.log(isPinned);
         if(isPinned)
             pinnedInput.checked = true;
         pinnedInput.addEventListener('change',()=>{
-            console.log('klikniety check');
             this.ui.onPinnedClick(isPinned,noteId,this.notes);
             this.synchronizeLs();
         });
         return pinnedAreaDiv;
     }
-    
-    
 }
