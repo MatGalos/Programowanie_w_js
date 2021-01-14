@@ -122,9 +122,8 @@ function addWeatherInfoToHtml(){
 
 function createWeatherObj(weather){
   let {name, main:{temp : temp, feels_like : feels_like, pressure : pressure, humidity : humidity}} = weather;
-  let description = weather.weather[0].description;
   let icon = weather.weather[0].icon;
-  let weatherObj = {name : name, temp : temp, feelsLiketemp : feels_like, pressure : pressure, humidity : humidity, description : description, icon : icon};
+  let weatherObj = {name : name, temp : temp, feelsLiketemp : feels_like, pressure : pressure, humidity : humidity, icon : icon};
   return weatherObj;
 }
 
